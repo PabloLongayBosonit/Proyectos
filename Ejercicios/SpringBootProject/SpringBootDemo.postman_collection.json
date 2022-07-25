@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "7ed94502-c155-4588-8d74-82a002b19951",
+		"name": "SpringBootDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21914220"
+	},
+	"item": [
+		{
+			"name": "/user/{name}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/Pablo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"Pablo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "useradd/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    name:\"Pablo\",\r\n    city:\"Málaga\",\r\n    age:\"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/useradd/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"useradd",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
