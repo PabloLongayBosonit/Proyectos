@@ -1,0 +1,26 @@
+2022-07-27 10:51:42.535 ERROR 25008 --- [http-nio-8080-exec-5] com.loggin.loggin.Controlador            : Error en controlador
+2022-07-27 10:52:03.336 ERROR 25008 --- [http-nio-8080-exec-6] com.loggin.loggin.Controlador            : Error en controlador
+2022-07-27 10:52:04.260 ERROR 25008 --- [http-nio-8080-exec-7] com.loggin.loggin.Controlador            : Error en controlador
+2022-07-27 10:53:45.098  WARN 12412 --- [http-nio-8080-exec-2] com.loggin.loggin.Controlador            : Warning en controlador
+2022-07-27 10:54:11.287  INFO 14248 --- [main] com.loggin.loggin.LogginApplication      : Starting LogginApplication using Java 18.0.1.1 on L2201046 with PID 14248 (C:\Users\pablo.longay\Desktop\loggin\target\classes started by pablo.longay in C:\Users\pablo.longay\Desktop\loggin)
+2022-07-27 10:54:11.293  INFO 14248 --- [main] com.loggin.loggin.LogginApplication      : No active profile set, falling back to 1 default profile: "default"
+2022-07-27 10:54:12.083  INFO 14248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-27 10:54:12.091  INFO 14248 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-27 10:54:12.092  INFO 14248 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-27 10:54:12.166  INFO 14248 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-27 10:54:12.167  INFO 14248 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 826 ms
+2022-07-27 10:54:12.452  INFO 14248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-27 10:54:12.460  INFO 14248 --- [main] com.loggin.loggin.LogginApplication      : Started LogginApplication in 1.518 seconds (JVM running for 1.819)
+2022-07-27 10:54:21.570  INFO 17552 --- [main] com.loggin.loggin.LogginApplication      : Starting LogginApplication using Java 18.0.1.1 on L2201046 with PID 17552 (C:\Users\pablo.longay\Desktop\loggin\target\classes started by pablo.longay in C:\Users\pablo.longay\Desktop\loggin)
+2022-07-27 10:54:21.574  INFO 17552 --- [main] com.loggin.loggin.LogginApplication      : No active profile set, falling back to 1 default profile: "default"
+2022-07-27 10:54:22.368  INFO 17552 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-27 10:54:22.378  INFO 17552 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-27 10:54:22.378  INFO 17552 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-07-27 10:54:22.447  INFO 17552 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-27 10:54:22.448  INFO 17552 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 824 ms
+2022-07-27 10:54:22.721  INFO 17552 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-27 10:54:22.730  INFO 17552 --- [main] com.loggin.loggin.LogginApplication      : Started LogginApplication in 1.498 seconds (JVM running for 1.802)
+2022-07-27 10:57:08.857  INFO 17552 --- [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-27 10:57:08.858  INFO 17552 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-27 10:57:08.859  INFO 17552 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-07-27 10:57:08.884  WARN 17552 --- [http-nio-8080-exec-3] com.loggin.loggin.Controlador            : Warning en controlador
