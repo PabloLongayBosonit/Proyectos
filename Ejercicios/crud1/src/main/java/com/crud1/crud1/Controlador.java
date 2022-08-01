@@ -49,4 +49,17 @@ public class Controlador {
        return lista;
 
     }
+
+    @PutMapping("persona/modificar")
+    public Persona personaModificada(@RequestBody Persona persona) throws Exception{
+        try {
+            Persona personaMod = personaRepositorio.findById(persona.getId()).get();
+            personaRepositorio.save(persona);
+            return persona;
+        }
+        catch(Exception e) {
+            System.out.println("No se encuentra el ID");
+            return null;
+        }
+    }
 }
