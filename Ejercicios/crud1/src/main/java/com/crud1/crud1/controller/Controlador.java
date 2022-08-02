@@ -1,5 +1,10 @@
-package com.crud1.crud1;
+package com.crud1.crud1.controller;
 
+import com.crud1.crud1.application.persona.PersonaServiceImp;
+import com.crud1.crud1.domain.Persona;
+import com.crud1.crud1.infraestructure.PersonaRepositorio;
+import com.crud1.crud1.infraestructure.dto.input.PersonaInputDto;
+import com.crud1.crud1.infraestructure.dto.output.PersonaOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,16 +15,17 @@ import java.util.List;
 public class Controlador {
     @Autowired
     PersonaRepositorio personaRepositorio;
-
+    @Autowired
+    PersonaServiceImp personaServiceImp;
     @PostMapping("/persona")
-    public Persona addPersona(@RequestBody Persona persona){
+    public PersonaOutputDto addPersona(@RequestBody PersonaInputDto personaInputDto){
         try{
-            persona.Validador();
-            personaRepositorio.save(persona);
-            return persona;
+          return personaServiceImp.addPersona(personaInputDto);
         } catch (Exception e) {
+            System.out.println("Controlador");
             System.out.println(e.getMessage());
-            return persona;
+            throw new RuntimeException();
+
         }
     }
 
