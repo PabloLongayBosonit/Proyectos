@@ -80,6 +80,7 @@ public class Persona {
 
     public PersonaOutputDto personaToOutputDto(Persona persona){
         PersonaOutputDto personaOutputDto  = new PersonaOutputDto();
+        personaOutputDto.setId(persona.getId());
         personaOutputDto.setUsuario(persona.getUsuario());
         personaOutputDto.setPassword(persona.getPassword());
         personaOutputDto.setName(persona.getName());

@@ -30,42 +30,33 @@ public class Controlador {
     }
 
     @GetMapping("id/{id}")
-    public Persona buscarID(@PathVariable int id) throws Exception{
+    public PersonaOutputDto buscarID(@PathVariable int id) {
         try {
-            return personaRepositorio.findById(id).get();
-        }
-        catch(Exception e) {
-            System.out.println("No se encuentra el ID");
+           return personaServiceImp.findByID(id);
+        } catch (Exception e) {
             return null;
         }
+
     }
 
     @GetMapping("persona/{nombre}")
-    public List<Persona> buscarNombre(@PathVariable String nombre){
-        List<Persona> listaPersonas = new ArrayList<Persona>();
-        List<Persona> listaMatch = new ArrayList<Persona>();
-        listaMatch = personaRepositorio.findAll().stream().filter(n->n.getName().equalsIgnoreCase(nombre)).toList();
-        return listaMatch;
+    public List<PersonaOutputDto> buscarNombre(@PathVariable String nombre){
+        return personaServiceImp.searchByName(nombre);
     }
 
     @GetMapping("entradas")
-    public List<Persona> listaCompleta() {
-       List<Persona> lista = new ArrayList<Persona>();
-       lista = personaRepositorio.findAll().stream().toList();
-       return lista;
+    public List<PersonaOutputDto> listaCompleta() {
+   return personaServiceImp.devolverEntradas();
 
     }
 
-    @PutMapping("persona/modificar")
-    public Persona personaModificada(@RequestBody Persona persona) throws Exception{
-        try {
-            Persona personaMod = personaRepositorio.findById(persona.getId()).get();
-            personaRepositorio.save(persona);
-            return persona;
-        }
-        catch(Exception e) {
-            System.out.println("No se encuentra el ID");
-            return null;
-        }
+    @PutMapping("persona/modificar/{id}")
+    public PersonaOutputDto updateUserbyID(@PathVariable(value = "id")int id, @RequestBody PersonaInputDto personaInputDto) {
+        return personaServiceImp.updateByID(id, personaInputDto);
+    }
+
+    @DeleteMapping("borrar/{id}")
+    public void borrarPorId(@PathVariable int id) {
+        personaServiceImp.borrarPorID(id);
     }
 }
