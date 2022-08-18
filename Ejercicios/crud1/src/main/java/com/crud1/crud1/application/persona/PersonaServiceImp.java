@@ -1,13 +1,14 @@
 package com.crud1.crud1.application.persona;
 
-
 import com.crud1.crud1.domain.Persona;
-import com.crud1.crud1.infraestructure.PersonaRepositorio;
+import com.crud1.crud1.exceptions.UnprocesableException;
 import com.crud1.crud1.infraestructure.dto.input.PersonaInputDto;
 import com.crud1.crud1.infraestructure.dto.output.PersonaOutputDto;
+import com.crud1.crud1.infraestructure.repository.PersonaJpa;
 import lombok.AllArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,60 +18,71 @@ import java.util.List;
 public class PersonaServiceImp implements PersonaService{
 
     @Autowired
-    PersonaRepositorio personaRepositorio;
-    //@Autowired Persona persona;
-    public PersonaOutputDto addPersona(PersonaInputDto personaInputDto) throws Exception{
-        try {
-            Persona persona = new Persona();
-            persona = persona.InputDtoToPersona(personaInputDto);
-            personaRepositorio.save(persona);
-            System.out.println("estamos antes de return addpersona");
-            return persona.personaToOutputDto(persona);
+    PersonaJpa personaJpa;
 
-        } catch (Exception e) {
+
+    @Override
+    public PersonaOutputDto addPersona(PersonaInputDto personaInputDto){
+
+        Persona persona = new Persona();
+        try {
+            personaJpa.save(persona.DtoToPersona(personaInputDto));
+            return persona.PersonaToDto(persona.DtoToPersona(personaInputDto));
+        }
+        catch(Exception e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException(e);
+            throw new UnprocesableException(e.getMessage());
         }
-    }
 
-    public PersonaOutputDto findByID(int id) throws Exception{
-        Persona persona;
-       persona = personaRepositorio.findById(id).orElseThrow(()-> new Exception("No se encuentra el ID"));
 
-       return persona.personaToOutputDto(persona);
     }
 
     @Override
-    public List<PersonaOutputDto> searchByName(String nombre) {
-        return personaRepositorio.buscarPersonasPorNombre(nombre).stream().map(n-> n.personaToOutputDto(n)).toList();
+    public PersonaOutputDto buscarPorId(String id) {
+
+        Persona persona = new Persona();
+        return persona.PersonaToDto(personaJpa.findById(Integer.valueOf(id)).get());
+
     }
 
     @Override
-    public List<PersonaOutputDto> devolverEntradas() {
-        return personaRepositorio.findAll().stream().map(n-> n.personaToOutputDto(n)).toList();
+    public ResponseEntity<List<PersonaOutputDto>> buscarPorNombre(String nombre) {
+
+        return new ResponseEntity<>( personaJpa.buscarPersonasPorNombre(nombre).stream().map(n->n.PersonaToDto(n)).toList(),HttpStatus.OK);
+
+
     }
 
     @Override
-    public PersonaOutputDto updateByID(int id, PersonaInputDto personaInputDto) {
+    public ResponseEntity<List<PersonaOutputDto>> buscarTodos() {
+
+        return new ResponseEntity<>(personaJpa.findAll().stream().map(n->n.PersonaToDto(n)).toList(),HttpStatus.OK);
+    }
+
+    @Override
+    public PersonaOutputDto modificarPorId(String id, PersonaInputDto personaInputDto) {
+
+        personaJpa.findById(Integer.valueOf(id)).get();
         try {
             Persona persona = new Persona();
-            Persona personaModif = persona.InputDtoToPersona(personaInputDto);
-            personaModif.setId(id);
-            return persona.personaToOutputDto(persona);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            Persona personaMod = persona.DtoToPersona(personaInputDto);
+            personaMod.setId(id);
+            personaJpa.save(personaMod);
+            return persona.PersonaToDto(personaMod);
         }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new UnprocesableException(e.getMessage());
+        }
+
 
     }
 
     @Override
-    public PersonaOutputDto borrarPorID(int id) {
-        try {
-            Persona persona = personaRepositorio.findById(id).get();
-            personaRepositorio.delete(persona);
-            return new PersonaOutputDto();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void borrarPorId(String id) {
+
+        personaJpa.delete(personaJpa.findById(Integer.valueOf(id)).get());
     }
+
+
 }
