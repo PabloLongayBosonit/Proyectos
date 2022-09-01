@@ -1,5 +1,6 @@
 package com.crud1.crud1.application;
 
+import com.crud1.crud1.domain.Asignatura;
 import com.crud1.crud1.domain.Persona;
 import com.crud1.crud1.domain.Student;
 import com.crud1.crud1.infraestructure.profesor.ProfesorOutputDto;
@@ -58,7 +59,6 @@ public class StudentServiceImp implements StudentService {
         student.setId_student(id);
         return student.studentToOutputDto(studentRepository.save(student));
     }
-
 
 }
 

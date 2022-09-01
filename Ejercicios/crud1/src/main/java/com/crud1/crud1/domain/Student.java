@@ -4,6 +4,7 @@ package com.crud1.crud1.domain;
 import com.crud1.crud1.infraestructure.student.StudentInputDto;
 import com.crud1.crud1.infraestructure.student.StudentOutputDto;
 import com.crud1.crud1.infraestructure.student.StudentOutputDtoFull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,14 +24,26 @@ public class Student {
     @Id
     @GeneratedValue
     @Column(name = "id_student")
-    private int id_student;
+    public int id_student;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id", referencedColumnName = "id")
     Persona persona;
     int num_horas_sem;
     String comments;
     String branch;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "estudiantesInscritos")
+        public Set<Asignatura> asignaturasInscritas = new HashSet<>();
+        public Set<Asignatura> getAsignaturasInscritas() {
+            return asignaturasInscritas;
+        }
+
+        public void addAsignaturaToStudent(Asignatura asignatura){
+            this.asignaturasInscritas.add(asignatura);
+        }
+
+
 
     public StudentOutputDto studentToOutputDto(Student student){
 

@@ -2,6 +2,7 @@ package com.crud1.crud1.controller;
 
 import com.crud1.crud1.application.AsignaturaService;
 import com.crud1.crud1.application.AsignaturaServiceImp;
+import com.crud1.crud1.domain.Student;
 import com.crud1.crud1.infraestructure.asignatura.AsignaturaInputDto;
 import com.crud1.crud1.infraestructure.asignatura.AsignaturaOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,14 @@ public class AsignaturaController {
         return asignaturaServiceImp.listAsignatura();
     }
 
+    @PostMapping("asignatura/{id_asignatura}/estudiante/{id_estudiante}")
+    public Student addAsignaturaStudent(@PathVariable int id_asignatura, @PathVariable int id_estudiante){
+        return asignaturaServiceImp.nuevoStudentAsignatura(id_asignatura, id_estudiante);
+    }
+
+    @PostMapping("asignatura/estudiante/{id_estudiante}")
+    public List<AsignaturaOutputDto> agregarEstudianteAsignatura(@RequestBody List<Integer> listaAsignaturas, @PathVariable int id_estudiante ){
+        return asignaturaServiceImp.agregarEstudianteAsignatura(listaAsignaturas, id_estudiante);
+    }
 
 }

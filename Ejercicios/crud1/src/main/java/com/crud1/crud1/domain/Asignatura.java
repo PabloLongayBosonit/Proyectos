@@ -2,6 +2,7 @@ package com.crud1.crud1.domain;
 
 import com.crud1.crud1.infraestructure.asignatura.AsignaturaInputDto;
 import com.crud1.crud1.infraestructure.asignatura.AsignaturaOutputDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,9 +24,23 @@ public class Asignatura {
     @GeneratedValue
     int id_asignatura;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(referencedColumnName = "id")
-//    Profesor profesor;
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable (
+            joinColumns = @JoinColumn,
+            //NECESARIO PARA EL MANYTOMANY
+            inverseJoinColumns = @JoinColumn
+    )
+            //METODOLOGIA PARA MANYTOMANY
+    Set<Student> estudiantesInscritos = new HashSet<>();
+
+    public Set<Student> getEstudiantesInscritos(){
+        return estudiantesInscritos;
+    }
+
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(referencedColumnName = "id")
+Profesor profesor;
     public String asignatura;
     public String comments;
     public Date fecha_ini;
@@ -45,6 +62,9 @@ public class Asignatura {
         this.comments = asignaturaInputDto.getComments();
         this.fecha_ini = asignaturaInputDto.getFecha_ini();
         this.fecha_fin = asignaturaInputDto.getFecha_fin();
+    }
+    public void addStudentToAsignatura(Student student){
+        this.estudiantesInscritos.add(student);
     }
 }
 

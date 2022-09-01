@@ -1,5 +1,6 @@
 package com.crud1.crud1.application;
 
+import com.crud1.crud1.domain.Asignatura;
 import com.crud1.crud1.infraestructure.student.StudentInputDto;
 import com.crud1.crud1.infraestructure.student.StudentOutputDto;
 import com.crud1.crud1.infraestructure.student.StudentOutputDtoFull;
@@ -13,7 +14,6 @@ public interface StudentService {
     List<StudentOutputDto> listaStudent();
     StudentOutputDto modifStudent(StudentInputDto studentInputDto, int id_student);
     StudentOutputDtoFull  buscarPorIdFull(int id);
-
 
 
 }
