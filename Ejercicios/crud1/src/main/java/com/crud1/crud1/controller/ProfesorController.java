@@ -4,6 +4,7 @@ import com.crud1.crud1.application.ProfesorServiceImp;
 import com.crud1.crud1.infraestructure.profesor.ProfesorInputDto;
 import com.crud1.crud1.infraestructure.profesor.ProfesorOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -46,11 +47,18 @@ public class ProfesorController {
         return profesorServiceImp.borrarProfId(id);
     }
 
-    @GetMapping("profesor/{id}")
+    @GetMapping("rest/profesor/{id}")
     public ProfesorOutputDto profRestTemplate(@PathVariable int id){
 
-        ResponseEntity<ProfesorOutputDto> rs = new RestTemplate().getForEntity("http://localhost:8080/profesor/"+id, ProfesorOutputDto.class);
-        
+        ResponseEntity<ProfesorOutputDto> rs = new RestTemplate().getForEntity(
+                "http://localhost:8080/profesor/"+id, ProfesorOutputDto.class);
+        if(rs.getStatusCode() == HttpStatus.OK)
+        {
+            return rs.getBody();
+        }
+        else {
+            throw new RuntimeException("Algo falla");
+        }
     }
 
 }
