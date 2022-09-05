@@ -61,12 +61,16 @@ public class AsignaturaServiceImp implements AsignaturaService {
         return studentRepository.save(student);
 
     }
-
-    public List<AsignaturaOutputDto> agregarEstudianteAsignatura(List<Integer> listaAsignaturas, int id_estudiante){
-        List<Asignatura> listaAsignatura = listaAsignaturas.stream().map(n -> asignaturaRepository.findById(n).get()).toList();
-        Student student = studentRepository.findById(id_estudiante).get();
-        return
-
+    //listaAsignaturas = [1,3,7]      id_estudiante = 2
+    public List<Asignatura> agregarEstudianteAsignatura(List<Integer> listaAsignaturas, int id_estudiante){
+        List<Asignatura> asignaturasEnLista = listaAsignaturas.stream().map(n -> asignaturaRepository.findById(n).orElseThrow()).toList();
+        Student student = studentRepository.findById(id_estudiante).orElseThrow();
+        for(var i = 0; i<asignaturasEnLista.size(); i++){
+            student.addAsignaturaToStudent(asignaturasEnLista.get(i));
+            asignaturasEnLista.get(i).addStudentToAsignatura(student);
+        }
+        studentRepository.save(student);
+        return asignaturasEnLista;
     }
 
 }

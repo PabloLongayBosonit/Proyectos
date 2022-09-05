@@ -16,5 +16,5 @@ public interface AsignaturaService {
     List<AsignaturaOutputDto> listAsignatura();
     Student nuevoStudentAsignatura(int id_asignatura, int id_estudiante);
 
-    List<AsignaturaOutputDto> agregarEstudianteAsignatura (List<Integer> listaAsignaturas, int id_estudiante);
+    List<Asignatura> agregarEstudianteAsignatura (List<Integer> listaAsignaturas, int id_estudiante);
 }

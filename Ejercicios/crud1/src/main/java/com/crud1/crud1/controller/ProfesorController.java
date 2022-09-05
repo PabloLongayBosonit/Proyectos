@@ -4,7 +4,9 @@ import com.crud1.crud1.application.ProfesorServiceImp;
 import com.crud1.crud1.infraestructure.profesor.ProfesorInputDto;
 import com.crud1.crud1.infraestructure.profesor.ProfesorOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -43,4 +45,14 @@ public class ProfesorController {
     public ProfesorOutputDto borrarProf(@PathVariable int id){
         return profesorServiceImp.borrarProfId(id);
     }
+
+    @GetMapping("profesor/{id}")
+    public ProfesorOutputDto profRestTemplate(@PathVariable int id){
+
+        ResponseEntity<ProfesorOutputDto> rs = new RestTemplate().getForEntity("http://localhost:8080/profesor/"+id, ProfesorOutputDto.class);
+        
+    }
+
 }
+
+

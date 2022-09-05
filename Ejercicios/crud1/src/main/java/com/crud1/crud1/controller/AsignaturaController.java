@@ -2,6 +2,7 @@ package com.crud1.crud1.controller;
 
 import com.crud1.crud1.application.AsignaturaService;
 import com.crud1.crud1.application.AsignaturaServiceImp;
+import com.crud1.crud1.domain.Asignatura;
 import com.crud1.crud1.domain.Student;
 import com.crud1.crud1.infraestructure.asignatura.AsignaturaInputDto;
 import com.crud1.crud1.infraestructure.asignatura.AsignaturaOutputDto;
@@ -46,7 +47,7 @@ public class AsignaturaController {
     }
 
     @PostMapping("asignatura/estudiante/{id_estudiante}")
-    public List<AsignaturaOutputDto> agregarEstudianteAsignatura(@RequestBody List<Integer> listaAsignaturas, @PathVariable int id_estudiante ){
+    public List<Asignatura> agregarEstudianteAsignatura(@RequestBody List<Integer> listaAsignaturas, @PathVariable int id_estudiante ){
         return asignaturaServiceImp.agregarEstudianteAsignatura(listaAsignaturas, id_estudiante);
     }
 
