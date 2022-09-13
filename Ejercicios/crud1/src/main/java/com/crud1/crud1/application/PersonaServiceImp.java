@@ -4,16 +4,31 @@ import com.crud1.crud1.domain.Persona;
 import com.crud1.crud1.infraestructure.persona.PersonaInputDto;
 import com.crud1.crud1.infraestructure.persona.PersonaOutputDto;
 import com.crud1.crud1.repository.PersonaRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.crud1.crud1.controller.PersonaController.*;
+
 
 @Service
 public class PersonaServiceImp implements PersonaService{
 
     @Autowired
     PersonaRepository personaRepository;
+
     @Override
     public PersonaOutputDto guardarPersona(PersonaInputDto personaInputDto) {
         Persona persona = personaRepository.save(new Persona(personaInputDto));
@@ -52,6 +67,4 @@ public class PersonaServiceImp implements PersonaService{
     public List<PersonaOutputDto> buscarPorNombre(String nombre) {
         return personaRepository.findByNombre(nombre).stream().map(n->n.PersonaToOutputDto()).toList();
     }
-
-
 }

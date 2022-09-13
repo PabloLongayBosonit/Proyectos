@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,6 +22,8 @@ public class Persona {
     String nombre;
     String apellido;
     String username;
+
+    Date fechacreacion;
 
 
 
